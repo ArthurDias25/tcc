@@ -15,7 +15,6 @@ class CreateGameGenresTable extends Migration
     {
         Schema::create('game_genres', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->foreignId('Id_Game')->constrained('games');
             $table->foreignId('Id_Genero')->constrained('genres');
         });
