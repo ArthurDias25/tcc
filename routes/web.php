@@ -22,3 +22,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/rank', 'Admin\GameController@rank')->name('rank');
+
+Route::any('/rank/filter','Admin\GameController@rankFilter')->name('rank.filter');
