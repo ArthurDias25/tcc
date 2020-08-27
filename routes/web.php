@@ -19,8 +19,18 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::resource('posts', 'Admin\PostController');
+
+Route::resource('like', 'Admin\PostLikeController');
+
+Route::any('/perfil/{id}','Admin\UserController@perfil')->name('perfil');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/rank', 'Admin\GameController@rank')->name('rank');
+Route::get('post/{id}', function(){
+    return view('layouts.post');
+});
 
-Route::any('/rank/filter','Admin\GameController@rankFilter')->name('rank.filter');
+Route::any('/rank', 'Admin\GameController@rank')->name('rank');
+
+Route::any('/rank/filter/{id}','Admin\GameController@rankFilter')->name('rank.filter');

@@ -2,14 +2,46 @@
 
 @section('content')
 
+<div>
+    <ul class="nav nav-tabs rank">
+        @if (isset($id))
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('rank')}}">Todos os Jogos</a>
+            </li>
+            @foreach ($categories as $category)
+                @if ($category->id == $id)
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{route('rank.filter',$category->id)}}">Top {{$category->Nome_GameCategory}}</a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('rank.filter',$category->id)}}">Top {{$category->Nome_GameCategory}}</a>
+                    </li>
+                @endif
+            @endforeach            
+        @else
+            <li class="nav-item">
+                <a class="nav-link active" href="{{route('rank')}}">Todos os Jogos</a>
+            </li>
+            @foreach ($categories as $category)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('rank.filter',$category->id)}}">Top {{$category->Nome_GameCategory}}</a>
+                </li>
+            @endforeach
+        @endif
+    </ul>
+</div>
+
 <table border="1" class="table table-striped">
     <thead style="background-color: #026d6c">
         <tr style="color: #ffffff">
+            <td>Posição</td>
             <td width="100" > Imagem </td>
             <td>Nome do Jogo</td>
             <td>Genero</td>
             <td>Desenvolvedores</td>
             <td>Plataformas</td>
+            <td>Nota Geral</td>
             <td>Nota</td>
             <td>Status</td>
 
@@ -18,6 +50,7 @@
     <tbody>
         @foreach ($games as $game)
         <tr>
+            <td><p>{{$positions++}}</p></td>
             <td>
                 <a href=""><img src="{{ url("storage/{$game->Imagem_Jogo}") }}" style="max-width: 100px;" ></a>
             </td>
@@ -41,38 +74,54 @@
                 @endforeach
             </td>
             <td>
-                @foreach ($game->listings as $listing)
-                
-                <p>{{$listing->Nota}}</p>
-                    
-                @endforeach
+
             </td>
             <td>
-                @foreach ($game->listings as $listing)
-                    @if ($listing->Id_Status == 1)
-                        <p><button type="button" class="btn btn-outline-success">{{$listing->status->Status}}
-                        
-                        </button></p>
-                    @elseif($listing->Id_Status == 2)
-                        <p><button type="button" class="btn btn-outline-info">{{$listing->status->Status}}</button></p>
-                    @elseif($listing->Id_Status == 3)
-                        <p><button type="button" class="btn btn-outline-secondary">{{$listing->status->Status}}</button></p>
-                    @elseif($listing->Id_Status == 4)
-                        <p><button type="button" class="btn btn-outline-dark">{{$listing->status->Status}}</button></p>
-                    @elseif($listing->Id_Status == 5)
-                        <p><button type="button" class="btn btn-outline-warning">{{$listing->status->Status}}</button></p>
-                    @elseif($listing->Id_Status == 6)
-                        <p><button type="button" class="btn btn-outline-danger">{{$listing->status->Status}}</button></p>
-                    @elseif($listing->Id_Status == 4)
-                        <p><button type="button" class="btn btn-outline-secondary">{{$listing->status->Status}}</button></p>   
-                    @else
-                        <p><button type="button" class="btn btn-outline-primary">Adcionar a Lista</button></p>
+                @if (isset ($listings))
+                    @php
+                        $count = 0;
+                    @endphp
+                    @foreach ($listings as $listing)
+                        @if ($listing->Id_Game == $game->id)
+                            @if ($listing->Nota)
+                                <p>{{$listing->Nota}}</p>
+                                @php
+                                    $count = 1;
+                                @endphp
+                            @else
+                                <p>N/A</p>
+                            @endif
+                        @endif
+                    @endforeach
+                    @if ($count == 0)
+                        <p>N/A</p>
                     @endif
-                @endforeach
+                @else
+                    <p>N/A</p>
+                @endif
             </td>
+            <td>
+                @if (isset ($listings))
+                    @php
+                        $count = 0;
+                    @endphp
+                    @foreach ($listings as $listing)
+                        @if ($listing->Id_Game == $game->id)
+                            <p><button type="button" class="btn btn-{{$listing->status->Status}}">{{$listing->status->Status}}</button></p>
+                            @php
+                                $count = 1;
+                            @endphp
+                        @endif
+                    @endforeach
+                    @if ($count == 0)
+                        <p><button type="button" class="btn btn-primary">Adcionar a Lista</button></p>
+                    @endif
+                @else
+                    <p><button type="button" class="btn btn-primary">Adcionar a Lista</button></p>
+                @endif
+            </td>           
         </tr>
-        @endforeach
-    
+        @endforeach    
     </tbody>
 </table>
     

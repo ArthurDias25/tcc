@@ -1,3 +1,74 @@
+$theme-colors: (
+    "Platinado": #a0a5b9,
+    "Dropado": #ff0000,
+    "menu": #026d6c,
+);
+
+.nav-tabs.rank .nav-item > .nav-link.active, 
+.nav-tabs.rank .nav-item > .nav-link:hover, 
+.navbar, 
+.navbar-nav > li > .dropdown-menu a:hover   {
+    color:white;
+    background-color: #026d6c;
+}
+
+
+
+//teste perfil estilo alvanista
+
+.capa {
+    background-position: 50% 35%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 330px;
+    position: relative;
+}
+
+.capa .container{
+    align-items: flex-end;
+    display: flex;
+    height: 100%;
+    position: relative;
+}
+
+
+.nome {
+    color: white;
+    text-shadow: 2px 0px 0px black, 
+    -2px 0px 0px black, 
+    0px 2px 0px black, 
+    0px -2px 0px black;
+    display: inline-block;
+    font-weight: 800;
+    padding: 10px 25px;
+}
+
+//CSS Felipe
+
+.fundo-nav {
+    background-color: #72ecea;
+}
+
+.banner {
+    width: 100%;
+    height: 250px;
+}
+
+.post {
+    width: 50px;
+    height: 50px;
+}
+
+
+.barra2 {
+    background-color: #026d6c;
+}
+
+.direita {
+    text-align: right;
+}
+
+
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 

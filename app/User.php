@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Post;
+use App\Models\PostLike;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -40,6 +42,16 @@ class User extends Authenticatable
     public function listings()
     {
         return $this->hasMany(Listing::class,'Id_Usuario','id');
+    }
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class,'Id_Pagina','id');
+    }
+
+    public function postlikes()
+    {
+        return $this->hasMany(PostLike::class,'Id_Usuario','id');
     }
 
 }
