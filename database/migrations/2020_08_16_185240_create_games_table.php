@@ -18,6 +18,7 @@ class CreateGamesTable extends Migration
             $table->string('Nome_Jogo');
             $table->foreignId('Id_GameCategories')->constrained('game_categories');
             $table->string('Imagem_Jogo');
+            $table->timestamps();
         });
     }
 

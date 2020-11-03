@@ -1,17 +1,119 @@
 $theme-colors: (
-    "Platinado": #a0a5b9,
+    "Jogando": rgb(30, 255, 0),
+    "Completo": rgb(0, 102, 255),
+    "Platinado": #b1e8f3,
+    "Jogou": rgb(255, 204, 62),
     "Dropado": #ff0000,
+    "Pausado": rgb(255, 255, 0),
+    "Planeja": rgb(214, 211, 211),
     "menu": #026d6c,
 );
 
 .nav-tabs.rank .nav-item > .nav-link.active, 
-.nav-tabs.rank .nav-item > .nav-link:hover, 
-.navbar, 
-.navbar-nav > li > .dropdown-menu a:hover   {
+.nav-tabs.rank .nav-item > .nav-link:hover,
+.navbar,
+.navbar-nav > li > .dropdown-menu a:hover {
     color:white;
     background-color: #026d6c;
 }
 
+.navbar-nav > li > .dropdown-menu{  
+    background-color: #343a40 ;
+}
+
+.navbar-nav > li > .dropdown-menu a{  
+    color: #37a167;
+}
+
+
+
+
+.post-action {
+    border-top: 1px solid whitesmoke;
+    background-color: #e3e5eb;
+    background-size: cover;
+    line-height: 20px;
+    padding: 15px 20px;
+    height: 70px;
+}
+
+.post-coments {
+    background: #fafafa;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.post-coments>ul>li.coments {
+    border-top: 1px solid #e9e9e9;
+    padding: 15px 20px;
+    position: relative;
+    min-height: 35px;
+}
+
+
+ul.unstyled, ol.unstyled {
+    margin-left: 0;
+    list-style: none;
+}
+
+//Adrian
+
+@media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
+    .app {
+        background-position:left center;
+        padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
+        margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
+                                      /* offset horizontal: half of image width and text area width */
+    }
+}
+
+h1 {
+    font-size:24px;
+    font-weight:normal;
+    margin:0px;
+    overflow:visible;
+    padding:0px;
+    text-align:center;
+}
+
+.event {
+    border-radius:4px;
+    color:#FFFFFF;
+    font-size:12px;
+    margin:0px 30px;
+    padding:2px 0px;
+}
+
+.event.listening {
+    background-color:#333333;
+    display:block;
+}
+
+.event.received {
+    background-color:#4B946A;
+    display:none;
+}
+
+#deviceready.ready .event.listening { display: none; }
+#deviceready.ready .event.received { display: block; }
+
+@keyframes fade {
+    from { opacity: 1.0; }
+    50% { opacity: 0.4; }
+    to { opacity: 1.0; }
+}
+
+.blink {
+    animation:fade 3000ms infinite;
+    -webkit-animation:fade 3000ms infinite;
+}
+
+
+@media screen and (prefers-color-scheme: dark) {
+    body {
+        background-image:linear-gradient(to bottom, #585858 0%, #1B1B1B 51%);
+    }
+}
 
 
 //teste perfil estilo alvanista

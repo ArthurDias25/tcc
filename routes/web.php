@@ -17,20 +17,51 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
+
+// Rotas de Form e Inserts no BD
 
 Route::resource('posts', 'Admin\PostController');
 
-Route::resource('like', 'Admin\PostLikeController');
+Route::resource('likePost', 'Admin\LikePostController');
 
-Route::any('/perfil/{id}','Admin\UserController@perfil')->name('perfil');
+Route::resource('likeComent', 'Admin\LikeComentController');
+
+Route::resource('coment', 'Admin\ComentController');
+
+Route::post('comentAdd', 'Admin\ComentController@store');
+
+Route::post('listAdd', 'Admin\GameController@listStore')->name('listAdd');
+Route::post('listEdit/{id}', 'Admin\GameController@listEdit')->name('listEdit');
+
+Route::post('userEdit/{id}','Admin\UserController@editPerfil')->name('editPerfil');
+
+Route::post('follow','Admin\UserController@follow')->name('follow');
+Route::post('unfollow/{id}','Admin\UserController@unfollow')->name('unfollow');
+
+Route::resource('response','Admin\ResponseController');
+
+//Route das Views
+
+Route::any('perfil/{id}','Admin\UserController@perfil')->name('perfil');
+
+Route::any('lista/{id}','Admin\GameController@listing')->name('list');
+
+Route::any('/','Admin\UserController@index')->name('index')->middleware('auth');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('post/{id}', function(){
-    return view('layouts.post');
-});
+Route::any('/game/{game_id}','Admin\GameController@game')->name('game');
 
 Route::any('/rank', 'Admin\GameController@rank')->name('rank');
 
 Route::any('/rank/filter/{id}','Admin\GameController@rankFilter')->name('rank.filter');
+
+Route::any('/games','Admin\GameController@search')->name('search');
+
+Route::view('userForm/{id}','public\userEdit')->name('userForm');
+
+
+//teste
+
+Route::post('/dinamic','Admin\GameController@dinamic')->name('dinamic');

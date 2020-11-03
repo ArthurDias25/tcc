@@ -65,6 +65,13 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+        'ftp' => [
+            'driver' => 'ftp',
+            'host' => 'ftp.hubsapiens.com.br',
+            'username' => 'ftp_usrgame@gamezone.hubsapiens.com.br',
+            'password' => '@gamezone1234567',
+        ]
+
     ],
 
     /*

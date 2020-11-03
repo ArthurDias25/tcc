@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Listing extends Model
 {
+    protected $fillable = [
+        'Id_Game', 'Id_Usuario','Id_Status','Comentarios', 'Nota' , 'Favorite'
+    ];
+
     public function status()
     {
         return $this->belongsTo(Status::class,'Id_Status','id');
@@ -19,4 +23,18 @@ class Listing extends Model
     {
         return $this->belongsTo(User::class,'Id_Usuario','id');
     }
+
+    public function listStatusFilter($status = null){
+        $results = $this->where(function ($query) use($status){
+            if($status){
+                $query->where('Id_Status','=',$status);
+            }
+        });
+
+        return $results;
+
+        //dd($results);
+
+    }
+
 }

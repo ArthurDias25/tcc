@@ -16,7 +16,8 @@ class CreateAnswerLikesTable extends Migration
         Schema::create('answer_likes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('Id_Resposta')->constrained('answers');
-            $table->foreignId('Id_Usuario')->constrained('users');    
+            $table->foreignId('Id_Usuario')->constrained('users');   
+            $table->timestamps(); 
         });
     }
 

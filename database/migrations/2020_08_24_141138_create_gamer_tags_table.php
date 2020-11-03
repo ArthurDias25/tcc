@@ -17,6 +17,7 @@ class CreateGamerTagsTable extends Migration
             $table->id();
             $table->string('Nome');
             $table->string('img');
+            $table->timestamps();
         });
     }
 

@@ -24,6 +24,8 @@ class CreateListingsTable extends Migration
             $table->date('Completado')->nullable();
             $table->time('Tempo')->nullable();
             $table->foreignId('Id_Status')->constrained('statuses');
+            $table->boolean('Favorite')->default(false);
+            $table->timestamps();
         });
     }
 

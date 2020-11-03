@@ -17,6 +17,7 @@ class CreatePostLikesTable extends Migration
             $table->id();
             $table->foreignId('Id_Postagem')->constrained('posts');
             $table->foreignId('Id_Usuario')->constrained('users');
+            $table->timestamps();
         });
     }
 

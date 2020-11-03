@@ -35,5 +35,35 @@ class Game extends Model
         return $this->hasMany(Listing::class,'Id_Game','id');
     }
 
+    public function posts(){
+        return $this->hasMany(Post::class,'Id_Game','id');
+    }
+
+    public function search($search = null){
+        $results = $this->where(function ($query) use($search){
+            if($search){
+                $query->where('Nome_Jogo','like',"%{$search}%");
+            }
+        });
+
+        return $results;
+
+        //dd($results);
+
+    }
+
+    public function listStatusFilter($status = null){
+        $results = $this->where(function ($query) use($status){
+            if($status){
+                $query->where('Id_Status','=',$status);
+            }
+        });
+
+        return $results;
+
+        //dd($results);
+
+    }
+
     
 }

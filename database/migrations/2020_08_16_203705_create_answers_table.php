@@ -17,7 +17,7 @@ class CreateAnswersTable extends Migration
             $table->id();
             $table->foreignId('Id_Comentario')->constrained('coments');
             $table->text('Resposta');
-            $table->foreignId('Id_Pagina')->constrained('pages');
+            $table->foreignId('Id_Usuario')->constrained('users');
             $table->timestamps();
         });
     }

@@ -39,6 +39,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function follower(){
+        return $this->hasMany(User::class,'Follower','id');
+    }
+    public function following()
+    {
+        return $this->hasMany(User::class,'Following','id');
+    }
+
     public function listings()
     {
         return $this->hasMany(Listing::class,'Id_Usuario','id');
@@ -46,7 +54,7 @@ class User extends Authenticatable
 
     public function posts()
     {
-        return $this->hasMany(Post::class,'Id_Pagina','id');
+        return $this->hasMany(Post::class,'Id_Usuario','id');
     }
 
     public function postlikes()

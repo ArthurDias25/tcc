@@ -17,6 +17,7 @@ class CreateComentLikesTable extends Migration
             $table->id();
             $table->foreignId('Id_Comentario')->constrained('coments');
             $table->foreignId('Id_Usuario')->constrained('users');
+            $table->timestamps();
         });
     }
 

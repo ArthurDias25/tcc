@@ -17,7 +17,7 @@ class CreateComentsTable extends Migration
             $table->id();
             $table->foreignId('Id_Postagem')->constrained('posts');
             $table->text('Comentario');
-            $table->foreignId('Id_Pagina')->constrained('pages');
+            $table->foreignId('Id_Usuario')->constrained('users');
             $table->timestamps();
         });
     }

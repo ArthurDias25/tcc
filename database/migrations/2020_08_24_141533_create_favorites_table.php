@@ -17,6 +17,7 @@ class CreateFavoritesTable extends Migration
             $table->id();
             $table->foreignId('Id_User')->constrained('users');
             $table->foreignId('Id_Jogo')->constrained('games');
+            $table->timestamps();
         });
     }
 

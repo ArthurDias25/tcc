@@ -7,21 +7,24 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('title'){{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body class="bg-secondary">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-dark shadow-sm fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -33,8 +36,31 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item form-inline dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbardrop" data-toggle="dropdown">
+                              <i class="fa fa-crosshairs" style="font-size: 15px; color:white"></i>
+                              <b style="color: white">Jogos</b>
+                            </a>
+                            <div class="dropdown-menu">
+                                {{-- <a class="dropdown-item" href="#"><b>Explorar</b></a> --}}
+                                <a class="dropdown-item" href="{{route('rank')}}"><b>Top Jogos</b></a>
+                                {{-- <a class="dropdown-item" href="#"><b>Lançamentos</b></a>
+                                <a class="dropdown-item" href="#"><b>Análises</b></a> --}}
+                            </div>
+                        </li>
+                        <li style="width: 5ch;"></li>
                     </ul>
+
+                    {{-- <input id="search" type="text" placeholder="Search" style="width: 65ch;"> --}}
+                    <form class="form-inline" action="{{route('search')}}">
+                        @csrf
+                        <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search" style="width: 65ch;"
+                        @if (isset($pesquisa))
+                            value="{{$pesquisa}}"
+                        @endif
+                        >
+                        <button class="btn btn-dark" type="submit"><i class="fa fa-search" style="font-size:20px"></i></button>
+                    </form>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -49,18 +75,26 @@
                                 </li>
                             @endif
                         @else
+                        @php
+                            $image = Auth::user()->img_perfil;
+                        @endphp
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{-- <img src="storage/{{Auth::user()->img_perfil}}" height="35"> --}}
+                                    <img src="{{url ("storage/".auth()->user()->img_perfil)}}" height="35">
+                                    {{ Auth::user()->name }} <span class="caret"></span> 
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{route ('perfil',Auth::user()->id)}}"><b>Meu Perfil</b></a>
+                                    <a class="dropdown-item" href="{{route ('list',Auth::user()->id)}}"><b>Game List</b></a>
+                                    {{-- <a class="dropdown-item" href="#"><b>Coleção</b></a> --}}
+                                    <a class="dropdown-item" href="{{route('userForm',Auth::user()->id)}}"><b>Configurações</b></a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Sair') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>
@@ -71,6 +105,8 @@
                 </div>
             </div>
         </nav>
+
+        <div class="search"></div>
 
         <main class="py-4">
             @yield('content')

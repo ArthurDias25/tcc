@@ -17,6 +17,7 @@ class CreateGameGenresTable extends Migration
             $table->id();
             $table->foreignId('Id_Game')->constrained('games');
             $table->foreignId('Id_Genero')->constrained('genres');
+            $table->timestamps();
         });
     }
 

@@ -8,6 +8,127 @@
   background-color: #026d6c;
 }
 
+.navbar-nav > li > .dropdown-menu {
+  background-color: #343a40;
+}
+
+.navbar-nav > li > .dropdown-menu a {
+  color: #37a167;
+}
+
+.post-action {
+  border-top: 1px solid whitesmoke;
+  background-color: #e3e5eb;
+  background-size: cover;
+  line-height: 20px;
+  padding: 15px 20px;
+  height: 70px;
+}
+
+.post-coments {
+  background: #fafafa;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.post-coments > ul > li.coments {
+  border-top: 1px solid #e9e9e9;
+  padding: 15px 20px;
+  position: relative;
+  min-height: 35px;
+}
+
+ul.unstyled,
+ol.unstyled {
+  margin-left: 0;
+  list-style: none;
+}
+
+@media screen and (min-aspect-ratio: 1/1) and (min-width: 400px) {
+  .app {
+    background-position: left center;
+    padding: 75px 0px 75px 170px;
+    /* padding-top + padding-bottom + text area = image height */
+    margin: -90px 0px 0px -198px;
+    /* offset vertical: half of image height */
+    /* offset horizontal: half of image width and text area width */
+  }
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: normal;
+  margin: 0px;
+  overflow: visible;
+  padding: 0px;
+  text-align: center;
+}
+
+.event {
+  border-radius: 4px;
+  color: #FFFFFF;
+  font-size: 12px;
+  margin: 0px 30px;
+  padding: 2px 0px;
+}
+
+.event.listening {
+  background-color: #333333;
+  display: block;
+}
+
+.event.received {
+  background-color: #4B946A;
+  display: none;
+}
+
+#deviceready.ready .event.listening {
+  display: none;
+}
+
+#deviceready.ready .event.received {
+  display: block;
+}
+
+@-webkit-keyframes fade {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.4;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.blink {
+  animation: fade 3000ms infinite;
+  -webkit-animation: fade 3000ms infinite;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+  body {
+    background-image: linear-gradient(to bottom, #585858 0%, #1B1B1B 51%);
+  }
+}
+
 .capa {
   background-position: 50% 35%;
   background-repeat: no-repeat;
@@ -82,8 +203,13 @@
   --danger: #e3342f;
   --light: #f8f9fa;
   --dark: #343a40;
-  --Platinado: #a0a5b9;
+  --Jogando: #1eff00;
+  --Completo: #0066ff;
+  --Platinado: #b1e8f3;
+  --Jogou: #ffcc3e;
   --Dropado: #ff0000;
+  --Pausado: yellow;
+  --Planeja: #d6d3d3;
   --menu: #026d6c;
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
@@ -2056,26 +2182,92 @@ pre code {
   background-color: #b9bbbe;
 }
 
+.table-Jogando,
+.table-Jogando > th,
+.table-Jogando > td {
+  background-color: #c0ffb8;
+}
+
+.table-Jogando th,
+.table-Jogando td,
+.table-Jogando thead th,
+.table-Jogando tbody + tbody {
+  border-color: #8aff7a;
+}
+
+.table-hover .table-Jogando:hover {
+  background-color: #a9ff9f;
+}
+
+.table-hover .table-Jogando:hover > td,
+.table-hover .table-Jogando:hover > th {
+  background-color: #a9ff9f;
+}
+
+.table-Completo,
+.table-Completo > th,
+.table-Completo > td {
+  background-color: #b8d4ff;
+}
+
+.table-Completo th,
+.table-Completo td,
+.table-Completo thead th,
+.table-Completo tbody + tbody {
+  border-color: #7aafff;
+}
+
+.table-hover .table-Completo:hover {
+  background-color: #9fc5ff;
+}
+
+.table-hover .table-Completo:hover > td,
+.table-hover .table-Completo:hover > th {
+  background-color: #9fc5ff;
+}
+
 .table-Platinado,
 .table-Platinado > th,
 .table-Platinado > td {
-  background-color: #e4e6eb;
+  background-color: #e9f9fc;
 }
 
 .table-Platinado th,
 .table-Platinado td,
 .table-Platinado thead th,
 .table-Platinado tbody + tbody {
-  border-color: #ced0db;
+  border-color: #d6f3f9;
 }
 
 .table-hover .table-Platinado:hover {
-  background-color: #d5d8e0;
+  background-color: #d3f3f9;
 }
 
 .table-hover .table-Platinado:hover > td,
 .table-hover .table-Platinado:hover > th {
-  background-color: #d5d8e0;
+  background-color: #d3f3f9;
+}
+
+.table-Jogou,
+.table-Jogou > th,
+.table-Jogou > td {
+  background-color: #fff1c9;
+}
+
+.table-Jogou th,
+.table-Jogou td,
+.table-Jogou thead th,
+.table-Jogou tbody + tbody {
+  border-color: #ffe49b;
+}
+
+.table-hover .table-Jogou:hover {
+  background-color: #ffeab0;
+}
+
+.table-hover .table-Jogou:hover > td,
+.table-hover .table-Jogou:hover > th {
+  background-color: #ffeab0;
 }
 
 .table-Dropado,
@@ -2098,6 +2290,50 @@ pre code {
 .table-hover .table-Dropado:hover > td,
 .table-hover .table-Dropado:hover > th {
   background-color: #ff9f9f;
+}
+
+.table-Pausado,
+.table-Pausado > th,
+.table-Pausado > td {
+  background-color: #ffffb8;
+}
+
+.table-Pausado th,
+.table-Pausado td,
+.table-Pausado thead th,
+.table-Pausado tbody + tbody {
+  border-color: #ffff7a;
+}
+
+.table-hover .table-Pausado:hover {
+  background-color: #ffff9f;
+}
+
+.table-hover .table-Pausado:hover > td,
+.table-hover .table-Pausado:hover > th {
+  background-color: #ffff9f;
+}
+
+.table-Planeja,
+.table-Planeja > th,
+.table-Planeja > td {
+  background-color: #f4f3f3;
+}
+
+.table-Planeja th,
+.table-Planeja td,
+.table-Planeja thead th,
+.table-Planeja tbody + tbody {
+  border-color: #eae8e8;
+}
+
+.table-hover .table-Planeja:hover {
+  background-color: #e8e6e6;
+}
+
+.table-hover .table-Planeja:hover > td,
+.table-hover .table-Planeja:hover > th {
+  background-color: #e8e6e6;
 }
 
 .table-menu,
@@ -3120,45 +3356,168 @@ fieldset:disabled a.btn {
   box-shadow: 0 0 0 0.2rem rgba(82, 88, 93, 0.5);
 }
 
+.btn-Jogando {
+  color: #212529;
+  background-color: #1eff00;
+  border-color: #1eff00;
+}
+
+.btn-Jogando:hover {
+  color: #fff;
+  background-color: #1ad900;
+  border-color: #18cc00;
+}
+
+.btn-Jogando:focus,
+.btn-Jogando.focus {
+  color: #fff;
+  background-color: #1ad900;
+  border-color: #18cc00;
+  box-shadow: 0 0 0 0.2rem rgba(30, 222, 6, 0.5);
+}
+
+.btn-Jogando.disabled,
+.btn-Jogando:disabled {
+  color: #212529;
+  background-color: #1eff00;
+  border-color: #1eff00;
+}
+
+.btn-Jogando:not(:disabled):not(.disabled):active,
+.btn-Jogando:not(:disabled):not(.disabled).active,
+.show > .btn-Jogando.dropdown-toggle {
+  color: #fff;
+  background-color: #18cc00;
+  border-color: #17bf00;
+}
+
+.btn-Jogando:not(:disabled):not(.disabled):active:focus,
+.btn-Jogando:not(:disabled):not(.disabled).active:focus,
+.show > .btn-Jogando.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(30, 222, 6, 0.5);
+}
+
+.btn-Completo {
+  color: #fff;
+  background-color: #0066ff;
+  border-color: #0066ff;
+}
+
+.btn-Completo:hover {
+  color: #fff;
+  background-color: #0057d9;
+  border-color: #0052cc;
+}
+
+.btn-Completo:focus,
+.btn-Completo.focus {
+  color: #fff;
+  background-color: #0057d9;
+  border-color: #0052cc;
+  box-shadow: 0 0 0 0.2rem rgba(38, 125, 255, 0.5);
+}
+
+.btn-Completo.disabled,
+.btn-Completo:disabled {
+  color: #fff;
+  background-color: #0066ff;
+  border-color: #0066ff;
+}
+
+.btn-Completo:not(:disabled):not(.disabled):active,
+.btn-Completo:not(:disabled):not(.disabled).active,
+.show > .btn-Completo.dropdown-toggle {
+  color: #fff;
+  background-color: #0052cc;
+  border-color: #004dbf;
+}
+
+.btn-Completo:not(:disabled):not(.disabled):active:focus,
+.btn-Completo:not(:disabled):not(.disabled).active:focus,
+.show > .btn-Completo.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(38, 125, 255, 0.5);
+}
+
 .btn-Platinado {
   color: #212529;
-  background-color: #a0a5b9;
-  border-color: #a0a5b9;
+  background-color: #b1e8f3;
+  border-color: #b1e8f3;
 }
 
 .btn-Platinado:hover {
-  color: #fff;
-  background-color: #8a90a9;
-  border-color: #8389a3;
+  color: #212529;
+  background-color: #90deee;
+  border-color: #85dbec;
 }
 
 .btn-Platinado:focus,
 .btn-Platinado.focus {
-  color: #fff;
-  background-color: #8a90a9;
-  border-color: #8389a3;
-  box-shadow: 0 0 0 0.2rem rgba(141, 146, 163, 0.5);
+  color: #212529;
+  background-color: #90deee;
+  border-color: #85dbec;
+  box-shadow: 0 0 0 0.2rem rgba(155, 203, 213, 0.5);
 }
 
 .btn-Platinado.disabled,
 .btn-Platinado:disabled {
   color: #212529;
-  background-color: #a0a5b9;
-  border-color: #a0a5b9;
+  background-color: #b1e8f3;
+  border-color: #b1e8f3;
 }
 
 .btn-Platinado:not(:disabled):not(.disabled):active,
 .btn-Platinado:not(:disabled):not(.disabled).active,
 .show > .btn-Platinado.dropdown-toggle {
-  color: #fff;
-  background-color: #8389a3;
-  border-color: #7b829e;
+  color: #212529;
+  background-color: #85dbec;
+  border-color: #7ad8eb;
 }
 
 .btn-Platinado:not(:disabled):not(.disabled):active:focus,
 .btn-Platinado:not(:disabled):not(.disabled).active:focus,
 .show > .btn-Platinado.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(141, 146, 163, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(155, 203, 213, 0.5);
+}
+
+.btn-Jogou {
+  color: #212529;
+  background-color: #ffcc3e;
+  border-color: #ffcc3e;
+}
+
+.btn-Jogou:hover {
+  color: #212529;
+  background-color: #ffc218;
+  border-color: #ffbf0b;
+}
+
+.btn-Jogou:focus,
+.btn-Jogou.focus {
+  color: #212529;
+  background-color: #ffc218;
+  border-color: #ffbf0b;
+  box-shadow: 0 0 0 0.2rem rgba(222, 179, 59, 0.5);
+}
+
+.btn-Jogou.disabled,
+.btn-Jogou:disabled {
+  color: #212529;
+  background-color: #ffcc3e;
+  border-color: #ffcc3e;
+}
+
+.btn-Jogou:not(:disabled):not(.disabled):active,
+.btn-Jogou:not(:disabled):not(.disabled).active,
+.show > .btn-Jogou.dropdown-toggle {
+  color: #212529;
+  background-color: #ffbf0b;
+  border-color: #fdba00;
+}
+
+.btn-Jogou:not(:disabled):not(.disabled):active:focus,
+.btn-Jogou:not(:disabled):not(.disabled).active:focus,
+.show > .btn-Jogou.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(222, 179, 59, 0.5);
 }
 
 .btn-Dropado {
@@ -3200,6 +3559,88 @@ fieldset:disabled a.btn {
 .btn-Dropado:not(:disabled):not(.disabled).active:focus,
 .show > .btn-Dropado.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(255, 38, 38, 0.5);
+}
+
+.btn-Pausado {
+  color: #212529;
+  background-color: yellow;
+  border-color: yellow;
+}
+
+.btn-Pausado:hover {
+  color: #212529;
+  background-color: #d9d900;
+  border-color: #cccc00;
+}
+
+.btn-Pausado:focus,
+.btn-Pausado.focus {
+  color: #212529;
+  background-color: #d9d900;
+  border-color: #cccc00;
+  box-shadow: 0 0 0 0.2rem rgba(222, 222, 6, 0.5);
+}
+
+.btn-Pausado.disabled,
+.btn-Pausado:disabled {
+  color: #212529;
+  background-color: yellow;
+  border-color: yellow;
+}
+
+.btn-Pausado:not(:disabled):not(.disabled):active,
+.btn-Pausado:not(:disabled):not(.disabled).active,
+.show > .btn-Pausado.dropdown-toggle {
+  color: #212529;
+  background-color: #cccc00;
+  border-color: #bfbf00;
+}
+
+.btn-Pausado:not(:disabled):not(.disabled):active:focus,
+.btn-Pausado:not(:disabled):not(.disabled).active:focus,
+.show > .btn-Pausado.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(222, 222, 6, 0.5);
+}
+
+.btn-Planeja {
+  color: #212529;
+  background-color: #d6d3d3;
+  border-color: #d6d3d3;
+}
+
+.btn-Planeja:hover {
+  color: #212529;
+  background-color: #c4bfbf;
+  border-color: #bdb9b9;
+}
+
+.btn-Planeja:focus,
+.btn-Planeja.focus {
+  color: #212529;
+  background-color: #c4bfbf;
+  border-color: #bdb9b9;
+  box-shadow: 0 0 0 0.2rem rgba(187, 185, 186, 0.5);
+}
+
+.btn-Planeja.disabled,
+.btn-Planeja:disabled {
+  color: #212529;
+  background-color: #d6d3d3;
+  border-color: #d6d3d3;
+}
+
+.btn-Planeja:not(:disabled):not(.disabled):active,
+.btn-Planeja:not(:disabled):not(.disabled).active,
+.show > .btn-Planeja.dropdown-toggle {
+  color: #212529;
+  background-color: #bdb9b9;
+  border-color: #b7b2b2;
+}
+
+.btn-Planeja:not(:disabled):not(.disabled):active:focus,
+.btn-Planeja:not(:disabled):not(.disabled).active:focus,
+.show > .btn-Planeja.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(187, 185, 186, 0.5);
 }
 
 .btn-menu {
@@ -3531,25 +3972,97 @@ fieldset:disabled a.btn {
   box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
 }
 
+.btn-outline-Jogando {
+  color: #1eff00;
+  border-color: #1eff00;
+}
+
+.btn-outline-Jogando:hover {
+  color: #212529;
+  background-color: #1eff00;
+  border-color: #1eff00;
+}
+
+.btn-outline-Jogando:focus,
+.btn-outline-Jogando.focus {
+  box-shadow: 0 0 0 0.2rem rgba(30, 255, 0, 0.5);
+}
+
+.btn-outline-Jogando.disabled,
+.btn-outline-Jogando:disabled {
+  color: #1eff00;
+  background-color: transparent;
+}
+
+.btn-outline-Jogando:not(:disabled):not(.disabled):active,
+.btn-outline-Jogando:not(:disabled):not(.disabled).active,
+.show > .btn-outline-Jogando.dropdown-toggle {
+  color: #212529;
+  background-color: #1eff00;
+  border-color: #1eff00;
+}
+
+.btn-outline-Jogando:not(:disabled):not(.disabled):active:focus,
+.btn-outline-Jogando:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-Jogando.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(30, 255, 0, 0.5);
+}
+
+.btn-outline-Completo {
+  color: #0066ff;
+  border-color: #0066ff;
+}
+
+.btn-outline-Completo:hover {
+  color: #fff;
+  background-color: #0066ff;
+  border-color: #0066ff;
+}
+
+.btn-outline-Completo:focus,
+.btn-outline-Completo.focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 102, 255, 0.5);
+}
+
+.btn-outline-Completo.disabled,
+.btn-outline-Completo:disabled {
+  color: #0066ff;
+  background-color: transparent;
+}
+
+.btn-outline-Completo:not(:disabled):not(.disabled):active,
+.btn-outline-Completo:not(:disabled):not(.disabled).active,
+.show > .btn-outline-Completo.dropdown-toggle {
+  color: #fff;
+  background-color: #0066ff;
+  border-color: #0066ff;
+}
+
+.btn-outline-Completo:not(:disabled):not(.disabled):active:focus,
+.btn-outline-Completo:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-Completo.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 102, 255, 0.5);
+}
+
 .btn-outline-Platinado {
-  color: #a0a5b9;
-  border-color: #a0a5b9;
+  color: #b1e8f3;
+  border-color: #b1e8f3;
 }
 
 .btn-outline-Platinado:hover {
   color: #212529;
-  background-color: #a0a5b9;
-  border-color: #a0a5b9;
+  background-color: #b1e8f3;
+  border-color: #b1e8f3;
 }
 
 .btn-outline-Platinado:focus,
 .btn-outline-Platinado.focus {
-  box-shadow: 0 0 0 0.2rem rgba(160, 165, 185, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(177, 232, 243, 0.5);
 }
 
 .btn-outline-Platinado.disabled,
 .btn-outline-Platinado:disabled {
-  color: #a0a5b9;
+  color: #b1e8f3;
   background-color: transparent;
 }
 
@@ -3557,14 +4070,50 @@ fieldset:disabled a.btn {
 .btn-outline-Platinado:not(:disabled):not(.disabled).active,
 .show > .btn-outline-Platinado.dropdown-toggle {
   color: #212529;
-  background-color: #a0a5b9;
-  border-color: #a0a5b9;
+  background-color: #b1e8f3;
+  border-color: #b1e8f3;
 }
 
 .btn-outline-Platinado:not(:disabled):not(.disabled):active:focus,
 .btn-outline-Platinado:not(:disabled):not(.disabled).active:focus,
 .show > .btn-outline-Platinado.dropdown-toggle:focus {
-  box-shadow: 0 0 0 0.2rem rgba(160, 165, 185, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(177, 232, 243, 0.5);
+}
+
+.btn-outline-Jogou {
+  color: #ffcc3e;
+  border-color: #ffcc3e;
+}
+
+.btn-outline-Jogou:hover {
+  color: #212529;
+  background-color: #ffcc3e;
+  border-color: #ffcc3e;
+}
+
+.btn-outline-Jogou:focus,
+.btn-outline-Jogou.focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 204, 62, 0.5);
+}
+
+.btn-outline-Jogou.disabled,
+.btn-outline-Jogou:disabled {
+  color: #ffcc3e;
+  background-color: transparent;
+}
+
+.btn-outline-Jogou:not(:disabled):not(.disabled):active,
+.btn-outline-Jogou:not(:disabled):not(.disabled).active,
+.show > .btn-outline-Jogou.dropdown-toggle {
+  color: #212529;
+  background-color: #ffcc3e;
+  border-color: #ffcc3e;
+}
+
+.btn-outline-Jogou:not(:disabled):not(.disabled):active:focus,
+.btn-outline-Jogou:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-Jogou.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 204, 62, 0.5);
 }
 
 .btn-outline-Dropado {
@@ -3601,6 +4150,78 @@ fieldset:disabled a.btn {
 .btn-outline-Dropado:not(:disabled):not(.disabled).active:focus,
 .show > .btn-outline-Dropado.dropdown-toggle:focus {
   box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.5);
+}
+
+.btn-outline-Pausado {
+  color: yellow;
+  border-color: yellow;
+}
+
+.btn-outline-Pausado:hover {
+  color: #212529;
+  background-color: yellow;
+  border-color: yellow;
+}
+
+.btn-outline-Pausado:focus,
+.btn-outline-Pausado.focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 0, 0.5);
+}
+
+.btn-outline-Pausado.disabled,
+.btn-outline-Pausado:disabled {
+  color: yellow;
+  background-color: transparent;
+}
+
+.btn-outline-Pausado:not(:disabled):not(.disabled):active,
+.btn-outline-Pausado:not(:disabled):not(.disabled).active,
+.show > .btn-outline-Pausado.dropdown-toggle {
+  color: #212529;
+  background-color: yellow;
+  border-color: yellow;
+}
+
+.btn-outline-Pausado:not(:disabled):not(.disabled):active:focus,
+.btn-outline-Pausado:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-Pausado.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 0, 0.5);
+}
+
+.btn-outline-Planeja {
+  color: #d6d3d3;
+  border-color: #d6d3d3;
+}
+
+.btn-outline-Planeja:hover {
+  color: #212529;
+  background-color: #d6d3d3;
+  border-color: #d6d3d3;
+}
+
+.btn-outline-Planeja:focus,
+.btn-outline-Planeja.focus {
+  box-shadow: 0 0 0 0.2rem rgba(214, 211, 211, 0.5);
+}
+
+.btn-outline-Planeja.disabled,
+.btn-outline-Planeja:disabled {
+  color: #d6d3d3;
+  background-color: transparent;
+}
+
+.btn-outline-Planeja:not(:disabled):not(.disabled):active,
+.btn-outline-Planeja:not(:disabled):not(.disabled).active,
+.show > .btn-outline-Planeja.dropdown-toggle {
+  color: #212529;
+  background-color: #d6d3d3;
+  border-color: #d6d3d3;
+}
+
+.btn-outline-Planeja:not(:disabled):not(.disabled):active:focus,
+.btn-outline-Planeja:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-Planeja.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(214, 211, 211, 0.5);
 }
 
 .btn-outline-menu {
@@ -5833,21 +6454,72 @@ a.badge-dark.focus {
   box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
 }
 
+.badge-Jogando {
+  color: #212529;
+  background-color: #1eff00;
+}
+
+a.badge-Jogando:hover,
+a.badge-Jogando:focus {
+  color: #212529;
+  background-color: #18cc00;
+}
+
+a.badge-Jogando:focus,
+a.badge-Jogando.focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(30, 255, 0, 0.5);
+}
+
+.badge-Completo {
+  color: #fff;
+  background-color: #0066ff;
+}
+
+a.badge-Completo:hover,
+a.badge-Completo:focus {
+  color: #fff;
+  background-color: #0052cc;
+}
+
+a.badge-Completo:focus,
+a.badge-Completo.focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 102, 255, 0.5);
+}
+
 .badge-Platinado {
   color: #212529;
-  background-color: #a0a5b9;
+  background-color: #b1e8f3;
 }
 
 a.badge-Platinado:hover,
 a.badge-Platinado:focus {
   color: #212529;
-  background-color: #8389a3;
+  background-color: #85dbec;
 }
 
 a.badge-Platinado:focus,
 a.badge-Platinado.focus {
   outline: 0;
-  box-shadow: 0 0 0 0.2rem rgba(160, 165, 185, 0.5);
+  box-shadow: 0 0 0 0.2rem rgba(177, 232, 243, 0.5);
+}
+
+.badge-Jogou {
+  color: #212529;
+  background-color: #ffcc3e;
+}
+
+a.badge-Jogou:hover,
+a.badge-Jogou:focus {
+  color: #212529;
+  background-color: #ffbf0b;
+}
+
+a.badge-Jogou:focus,
+a.badge-Jogou.focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(255, 204, 62, 0.5);
 }
 
 .badge-Dropado {
@@ -5865,6 +6537,40 @@ a.badge-Dropado:focus,
 a.badge-Dropado.focus {
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.5);
+}
+
+.badge-Pausado {
+  color: #212529;
+  background-color: yellow;
+}
+
+a.badge-Pausado:hover,
+a.badge-Pausado:focus {
+  color: #212529;
+  background-color: #cccc00;
+}
+
+a.badge-Pausado:focus,
+a.badge-Pausado.focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 0, 0.5);
+}
+
+.badge-Planeja {
+  color: #212529;
+  background-color: #d6d3d3;
+}
+
+a.badge-Planeja:hover,
+a.badge-Planeja:focus {
+  color: #212529;
+  background-color: #bdb9b9;
+}
+
+a.badge-Planeja:focus,
+a.badge-Planeja.focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(214, 211, 211, 0.5);
 }
 
 .badge-menu {
@@ -6043,18 +6749,60 @@ a.badge-menu.focus {
   color: #040505;
 }
 
+.alert-Jogando {
+  color: #108500;
+  background-color: #d2ffcc;
+  border-color: #c0ffb8;
+}
+
+.alert-Jogando hr {
+  border-top-color: #a9ff9f;
+}
+
+.alert-Jogando .alert-link {
+  color: #0a5200;
+}
+
+.alert-Completo {
+  color: #003585;
+  background-color: #cce0ff;
+  border-color: #b8d4ff;
+}
+
+.alert-Completo hr {
+  border-top-color: #9fc5ff;
+}
+
+.alert-Completo .alert-link {
+  color: #002152;
+}
+
 .alert-Platinado {
-  color: #535660;
-  background-color: #ecedf1;
-  border-color: #e4e6eb;
+  color: #5c797e;
+  background-color: #effafd;
+  border-color: #e9f9fc;
 }
 
 .alert-Platinado hr {
-  border-top-color: #d5d8e0;
+  border-top-color: #d3f3f9;
 }
 
 .alert-Platinado .alert-link {
-  color: #3b3d45;
+  color: #465d61;
+}
+
+.alert-Jogou {
+  color: #856a20;
+  background-color: #fff5d8;
+  border-color: #fff1c9;
+}
+
+.alert-Jogou hr {
+  border-top-color: #ffeab0;
+}
+
+.alert-Jogou .alert-link {
+  color: #5c4916;
 }
 
 .alert-Dropado {
@@ -6069,6 +6817,34 @@ a.badge-menu.focus {
 
 .alert-Dropado .alert-link {
   color: #520000;
+}
+
+.alert-Pausado {
+  color: #858500;
+  background-color: #ffffcc;
+  border-color: #ffffb8;
+}
+
+.alert-Pausado hr {
+  border-top-color: #ffff9f;
+}
+
+.alert-Pausado .alert-link {
+  color: #525200;
+}
+
+.alert-Planeja {
+  color: #6f6e6e;
+  background-color: #f7f6f6;
+  border-color: #f4f3f3;
+}
+
+.alert-Planeja hr {
+  border-top-color: #e8e6e6;
+}
+
+.alert-Planeja .alert-link {
+  color: #555555;
 }
 
 .alert-menu {
@@ -6523,21 +7299,72 @@ a.badge-menu.focus {
   border-color: #1b1e21;
 }
 
+.list-group-item-Jogando {
+  color: #108500;
+  background-color: #c0ffb8;
+}
+
+.list-group-item-Jogando.list-group-item-action:hover,
+.list-group-item-Jogando.list-group-item-action:focus {
+  color: #108500;
+  background-color: #a9ff9f;
+}
+
+.list-group-item-Jogando.list-group-item-action.active {
+  color: #fff;
+  background-color: #108500;
+  border-color: #108500;
+}
+
+.list-group-item-Completo {
+  color: #003585;
+  background-color: #b8d4ff;
+}
+
+.list-group-item-Completo.list-group-item-action:hover,
+.list-group-item-Completo.list-group-item-action:focus {
+  color: #003585;
+  background-color: #9fc5ff;
+}
+
+.list-group-item-Completo.list-group-item-action.active {
+  color: #fff;
+  background-color: #003585;
+  border-color: #003585;
+}
+
 .list-group-item-Platinado {
-  color: #535660;
-  background-color: #e4e6eb;
+  color: #5c797e;
+  background-color: #e9f9fc;
 }
 
 .list-group-item-Platinado.list-group-item-action:hover,
 .list-group-item-Platinado.list-group-item-action:focus {
-  color: #535660;
-  background-color: #d5d8e0;
+  color: #5c797e;
+  background-color: #d3f3f9;
 }
 
 .list-group-item-Platinado.list-group-item-action.active {
   color: #fff;
-  background-color: #535660;
-  border-color: #535660;
+  background-color: #5c797e;
+  border-color: #5c797e;
+}
+
+.list-group-item-Jogou {
+  color: #856a20;
+  background-color: #fff1c9;
+}
+
+.list-group-item-Jogou.list-group-item-action:hover,
+.list-group-item-Jogou.list-group-item-action:focus {
+  color: #856a20;
+  background-color: #ffeab0;
+}
+
+.list-group-item-Jogou.list-group-item-action.active {
+  color: #fff;
+  background-color: #856a20;
+  border-color: #856a20;
 }
 
 .list-group-item-Dropado {
@@ -6555,6 +7382,40 @@ a.badge-menu.focus {
   color: #fff;
   background-color: #850000;
   border-color: #850000;
+}
+
+.list-group-item-Pausado {
+  color: #858500;
+  background-color: #ffffb8;
+}
+
+.list-group-item-Pausado.list-group-item-action:hover,
+.list-group-item-Pausado.list-group-item-action:focus {
+  color: #858500;
+  background-color: #ffff9f;
+}
+
+.list-group-item-Pausado.list-group-item-action.active {
+  color: #fff;
+  background-color: #858500;
+  border-color: #858500;
+}
+
+.list-group-item-Planeja {
+  color: #6f6e6e;
+  background-color: #f4f3f3;
+}
+
+.list-group-item-Planeja.list-group-item-action:hover,
+.list-group-item-Planeja.list-group-item-action:focus {
+  color: #6f6e6e;
+  background-color: #e8e6e6;
+}
+
+.list-group-item-Planeja.list-group-item-action.active {
+  color: #fff;
+  background-color: #6f6e6e;
+  border-color: #6f6e6e;
 }
 
 .list-group-item-menu {
@@ -7540,15 +8401,48 @@ button.bg-dark:focus {
   background-color: #1d2124 !important;
 }
 
+.bg-Jogando {
+  background-color: #1eff00 !important;
+}
+
+a.bg-Jogando:hover,
+a.bg-Jogando:focus,
+button.bg-Jogando:hover,
+button.bg-Jogando:focus {
+  background-color: #18cc00 !important;
+}
+
+.bg-Completo {
+  background-color: #0066ff !important;
+}
+
+a.bg-Completo:hover,
+a.bg-Completo:focus,
+button.bg-Completo:hover,
+button.bg-Completo:focus {
+  background-color: #0052cc !important;
+}
+
 .bg-Platinado {
-  background-color: #a0a5b9 !important;
+  background-color: #b1e8f3 !important;
 }
 
 a.bg-Platinado:hover,
 a.bg-Platinado:focus,
 button.bg-Platinado:hover,
 button.bg-Platinado:focus {
-  background-color: #8389a3 !important;
+  background-color: #85dbec !important;
+}
+
+.bg-Jogou {
+  background-color: #ffcc3e !important;
+}
+
+a.bg-Jogou:hover,
+a.bg-Jogou:focus,
+button.bg-Jogou:hover,
+button.bg-Jogou:focus {
+  background-color: #ffbf0b !important;
 }
 
 .bg-Dropado {
@@ -7560,6 +8454,28 @@ a.bg-Dropado:focus,
 button.bg-Dropado:hover,
 button.bg-Dropado:focus {
   background-color: #cc0000 !important;
+}
+
+.bg-Pausado {
+  background-color: yellow !important;
+}
+
+a.bg-Pausado:hover,
+a.bg-Pausado:focus,
+button.bg-Pausado:hover,
+button.bg-Pausado:focus {
+  background-color: #cccc00 !important;
+}
+
+.bg-Planeja {
+  background-color: #d6d3d3 !important;
+}
+
+a.bg-Planeja:hover,
+a.bg-Planeja:focus,
+button.bg-Planeja:hover,
+button.bg-Planeja:focus {
+  background-color: #bdb9b9 !important;
 }
 
 .bg-menu {
@@ -7653,12 +8569,32 @@ button.bg-menu:focus {
   border-color: #343a40 !important;
 }
 
+.border-Jogando {
+  border-color: #1eff00 !important;
+}
+
+.border-Completo {
+  border-color: #0066ff !important;
+}
+
 .border-Platinado {
-  border-color: #a0a5b9 !important;
+  border-color: #b1e8f3 !important;
+}
+
+.border-Jogou {
+  border-color: #ffcc3e !important;
 }
 
 .border-Dropado {
   border-color: #ff0000 !important;
+}
+
+.border-Pausado {
+  border-color: yellow !important;
+}
+
+.border-Planeja {
+  border-color: #d6d3d3 !important;
 }
 
 .border-menu {
@@ -11303,13 +12239,40 @@ a.text-dark:focus {
   color: #121416 !important;
 }
 
+.text-Jogando {
+  color: #1eff00 !important;
+}
+
+a.text-Jogando:hover,
+a.text-Jogando:focus {
+  color: #15b300 !important;
+}
+
+.text-Completo {
+  color: #0066ff !important;
+}
+
+a.text-Completo:hover,
+a.text-Completo:focus {
+  color: #0047b3 !important;
+}
+
 .text-Platinado {
-  color: #a0a5b9 !important;
+  color: #b1e8f3 !important;
 }
 
 a.text-Platinado:hover,
 a.text-Platinado:focus {
-  color: #747b99 !important;
+  color: #6fd4e9 !important;
+}
+
+.text-Jogou {
+  color: #ffcc3e !important;
+}
+
+a.text-Jogou:hover,
+a.text-Jogou:focus {
+  color: #f1b100 !important;
 }
 
 .text-Dropado {
@@ -11319,6 +12282,24 @@ a.text-Platinado:focus {
 a.text-Dropado:hover,
 a.text-Dropado:focus {
   color: #b30000 !important;
+}
+
+.text-Pausado {
+  color: yellow !important;
+}
+
+a.text-Pausado:hover,
+a.text-Pausado:focus {
+  color: #b3b300 !important;
+}
+
+.text-Planeja {
+  color: #d6d3d3 !important;
+}
+
+a.text-Planeja:hover,
+a.text-Planeja:focus {
+  color: #b1abab !important;
 }
 
 .text-menu {

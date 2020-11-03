@@ -18,6 +18,7 @@ class CreateUserGamerTagsTable extends Migration
             $table->foreignId('Id_User')->constrained('users');
             $table->string('Nome');
             $table->foreignId('Id_GamerTag')->constrained('gamer_tags');
+            $table->timestamps();
         });
     }
 

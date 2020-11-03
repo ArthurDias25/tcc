@@ -1,17 +1,28 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\PostLike;
+use App\Http\Controllers\Controller;
+use App\Models\ComentLike;
 use Illuminate\Http\Request;
 
-class PostLikeController extends Controller
+class LikeComentController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $request;
+    private $repository;
+
+    public function __construct(Request $request, ComentLike $comentLike)
+    {
+        $this->request = $request;
+        $this->repository = $comentLike;
+    }
+
     public function index()
     {
         //
@@ -37,11 +48,13 @@ class PostLikeController extends Controller
     {
         $data = $request->all();
 
-       // dd($data);
-
-        PostLike::create($data);
-
-        return redirect()->back();
+        // dd($data);
+ 
+        //$this->repository()->create($data);
+ 
+         ComentLike::create($data);
+ 
+         return redirect()->back();
     }
 
     /**
@@ -86,6 +99,12 @@ class PostLikeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comentLike = $this->repository->where('id', $id)->first();
+
+        if(!$comentLike)
+            return redirect()->back();
+
+        $comentLike->delete();
+        return redirect()->back();
     }
 }

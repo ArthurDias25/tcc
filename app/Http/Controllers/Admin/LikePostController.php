@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Game;
-use App\Models\Post;
+use App\Models\PostLike;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class LikePostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,14 +14,15 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    protected $request;
-    private $repository;
+     protected $request;
+     private $repository;
 
-    public function __construct(Request $request, Post $post)
-    {
-        $this->request = $request;
-        $this->repository = $post;
-    }
+     public function __construct(Request $request, PostLike $postLike)
+     {
+         $this->request = $request;
+         $this->repository = $postLike;
+     }
+
 
     public function index()
     {
@@ -36,7 +36,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -51,7 +51,9 @@ class PostController extends Controller
 
        // dd($data);
 
-        Post::create($data);
+       //$this->repository()->create($data);
+
+        PostLike::create($data);
 
         return redirect()->back();
     }
@@ -75,15 +77,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::with('games')->where('id','=',$id)->first();
-
-        $games = Game::with('categories','genres','developers','platforms','listings')
-        ->get();
-
-        return view('edits.postEdit',[
-            'post' => $post,
-            'games' => $games,
-        ]);
+        //
     }
 
     /**
@@ -95,19 +89,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!$post = $this->repository->find($id)){
-            return redirect()->back();
-        }
-
-        $post->Titulo = $request->Titulo;
-
-        $post->Post = $request->Post;
-
-        $post->Id_Game = $request->Id_Game;
-
-        $post->save();
-
-        return redirect()->route('index');
+        //
     }
 
     /**
@@ -118,14 +100,12 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = $this->repository->where('id', $id)->first();
+        $postLike = $this->repository->where('id', $id)->first();
 
-        if(!$post){
+        if(!$postLike)
             return redirect()->back();
-        }
-        $post->Deleted = 1;
-        $post->Info = "Deletado pelo Usuario";
-        $post->save();
+
+        $postLike->delete();
         return redirect()->back();
     }
 }

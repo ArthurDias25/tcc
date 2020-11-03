@@ -17,6 +17,7 @@ class CreateGameDevelopersTable extends Migration
             $table->id();
             $table->foreignId('Id_Game')->constrained('games');
             $table->foreignId('Id_Developer')->constrained('developers');
+            $table->timestamps();
         });
     }
 

@@ -17,6 +17,7 @@ class CreateGamePortsTable extends Migration
             $table->id();
             $table->foreignId('Id_Game')->constrained('games');
             $table->foreignId('Id_Plataforma')->constrained('platforms');
+            $table->timestamps();
         });
     }
 

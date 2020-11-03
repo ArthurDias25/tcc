@@ -3,27 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Game;
-use App\Models\Post;
+use App\Models\Answer;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class ResponseController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    protected $request;
-    private $repository;
-
-    public function __construct(Request $request, Post $post)
-    {
-        $this->request = $request;
-        $this->repository = $post;
-    }
-
     public function index()
     {
         //
@@ -36,7 +25,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -49,11 +38,11 @@ class PostController extends Controller
     {
         $data = $request->all();
 
-       // dd($data);
-
-        Post::create($data);
-
-        return redirect()->back();
+        // dd($data);
+ 
+         Answer::create($data);
+ 
+         return redirect()->back();
     }
 
     /**
@@ -75,15 +64,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::with('games')->where('id','=',$id)->first();
-
-        $games = Game::with('categories','genres','developers','platforms','listings')
-        ->get();
-
-        return view('edits.postEdit',[
-            'post' => $post,
-            'games' => $games,
-        ]);
+        //
     }
 
     /**
@@ -95,19 +76,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!$post = $this->repository->find($id)){
-            return redirect()->back();
-        }
-
-        $post->Titulo = $request->Titulo;
-
-        $post->Post = $request->Post;
-
-        $post->Id_Game = $request->Id_Game;
-
-        $post->save();
-
-        return redirect()->route('index');
+        //
     }
 
     /**
@@ -118,14 +87,6 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = $this->repository->where('id', $id)->first();
-
-        if(!$post){
-            return redirect()->back();
-        }
-        $post->Deleted = 1;
-        $post->Info = "Deletado pelo Usuario";
-        $post->save();
-        return redirect()->back();
+        //
     }
 }

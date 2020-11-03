@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Game;
-use App\Models\Post;
+use App\Models\Coment;
+use App\User;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class ComentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +18,10 @@ class PostController extends Controller
     protected $request;
     private $repository;
 
-    public function __construct(Request $request, Post $post)
+    public function __construct(Request $request, Coment $comentario)
     {
         $this->request = $request;
-        $this->repository = $post;
+        $this->repository = $comentario;
     }
 
     public function index()
@@ -36,7 +36,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        
+        //
     }
 
     /**
@@ -49,12 +49,20 @@ class PostController extends Controller
     {
         $data = $request->all();
 
-       // dd($data);
+        Coment::create($data);
 
-        Post::create($data);
+        $user = User::where('id','=',$request->Id_Usuario)->first();
 
-        return redirect()->back();
+         $infoUser = array(
+             "name" => $user->name,
+             "img_perfil" => $user->img_perfil
+         );
+
+        echo json_encode($infoUser);
+
+        //return redirect()->back();
     }
+
 
     /**
      * Display the specified resource.
@@ -75,15 +83,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::with('games')->where('id','=',$id)->first();
-
-        $games = Game::with('categories','genres','developers','platforms','listings')
-        ->get();
-
-        return view('edits.postEdit',[
-            'post' => $post,
-            'games' => $games,
-        ]);
+        //
     }
 
     /**
@@ -95,19 +95,13 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!$post = $this->repository->find($id)){
+        if (!$comentario = $this->repository->find($id)){
             return redirect()->back();
         }
 
-        $post->Titulo = $request->Titulo;
-
-        $post->Post = $request->Post;
-
-        $post->Id_Game = $request->Id_Game;
-
-        $post->save();
-
-        return redirect()->route('index');
+        
+        $comentario->update($request->all());
+        return redirect()->back();
     }
 
     /**
@@ -118,14 +112,13 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = $this->repository->where('id', $id)->first();
+        $comentario = $this->repository->where('id', $id)->first();
 
-        if(!$post){
+        if(!$comentario){
             return redirect()->back();
         }
-        $post->Deleted = 1;
-        $post->Info = "Deletado pelo Usuario";
-        $post->save();
+        
+        $comentario->delete();
         return redirect()->back();
     }
 }
