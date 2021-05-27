@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Listing extends Model
 {
     protected $fillable = [
-        'Id_Game', 'Id_Usuario','Id_Status','Comentarios', 'Nota' , 'Favorite'
+        'Id_Game', 'Id_Usuario','Id_Status','Comentarios', 'Nota' , 'Favorite', 'Inicio', 'Finalização'
     ];
 
     public function status()

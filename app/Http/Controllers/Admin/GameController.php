@@ -42,12 +42,15 @@ class GameController extends Controller
         }
 
         $games = Game::with('categories','genres','developers','platforms','listings')
-        //->orderBy('Nome_Jogo')
-        ->get();
+        ->withCount(['listings as avg_nota' => function($q){
+            $q->select(DB::raw('coalesce(avg(Nota),0)'));
+        }])
+        ->orderByDesc('avg_nota')
+        ->paginate(50);
 
         $positions = 1;
 
-        $statuses = Status::all();
+        $statuses = Status::orderBy('id')->get();
 
    //     foreach ($games as $game){
    //         $avgs = Listing::with('games')->where('Id_Game','=',$game->id)->avg('Nota');
@@ -84,7 +87,13 @@ class GameController extends Controller
             $usu_id = Auth::user()->id;
             $listings = Listing::where('Id_Usuario','=',$usu_id)->get();
         }
-        $games = Game::with('categories','genres','developers','platforms','listings')->where('Id_GameCategories','=',$id)->get();
+        $games = Game::with('categories','genres','developers','platforms','listings')
+        ->where('Id_GameCategories','=',$id)
+        ->withCount(['listings as avg_nota' => function($q){
+            $q->select(DB::raw('coalesce(avg(Nota),0)'));
+        }])
+        ->orderByDesc('avg_nota')
+        ->paginate(50);
 
       /*  $games = DB::table('games')
         ->with('categories','genres','developers','platforms','listings')
@@ -92,11 +101,11 @@ class GameController extends Controller
         ->get();
 */
 
-        $statuses = Status::all();
-
+        $statuses = Status::orderBy('id')->get();
         $categories = GameCategory::all();
         $category = GameCategory::find($id);
         $positions = 1;
+
         if (isset($listings)){
             return view('public.rank',[
                 'games' => $games,
@@ -122,6 +131,7 @@ class GameController extends Controller
     public function listing(Request $request, $id){
 
         $stat = $request->status;
+        $order = $request->order;
         $gen = $request->genero;
         $plat = $request->plat;
 
@@ -132,10 +142,7 @@ class GameController extends Controller
                 $query->where('Id_Status','=',$stat);
             }
         })
-        ->orderByDesc('Nota')
         ->get();
-
-        
 
         $statuses = Status::with('listings')->orderBy('id')->get();
 
@@ -189,7 +196,7 @@ class GameController extends Controller
 
         $respostas = Answer::with('users','comentario')->get();
 
-        $statuses = Status::all();
+        $statuses = Status::orderBy('id')->get();
 
         return view('public.game',[
             'game' => $game,
@@ -205,16 +212,54 @@ class GameController extends Controller
     public function search(Request $request){
 
         //dd($request->search);
+        if($request->filter == "Jogos"){
+            return redirect()->route('games', [$request]);
+        }
 
+        if($request->filter == "Users"){
+            return redirect()->route('users', [$request]);
+        }        
+    }
+
+    public function games(Request $request){
+
+        if($request->filter){
+            $class = $request->filter;
+        }else{
+            $class = "Jogos";
+        }
+        $filters = $request->all();
         $pesquisa = $request->search;
-
+        $genero = $request->genero;
+        $plataforma = $request->plataforma;
+        $desenvolvedora = $request->desenvolvedora;
+        
         $games = Game::with('categories','genres','developers','platforms','listings')
-        ->where(function ($query) use($request){
-            if($request){
-                $query->where('Nome_Jogo','like',"%{$request->search}%");
+        ->whereHas('genres', function($q) use($request){
+            if($request->genero){
+                $q->where('Id_Genero','=',$request->genero);
             }
         })
-        ->get();
+        ->whereHas('platforms', function($q) use($request){
+            if($request->plataforma){
+                $q->where('Id_Plataforma','=',$request->plataforma);
+            }
+        })
+        ->whereHas('developers', function($q) use($request){
+            if($request->desenvolvedora){
+                $q->where('Id_Developer','=',$request->desenvolvedora);
+            }
+        })
+        ->where(function ($query) use($request){
+            if($request->search){
+                $query->whereRaw('upper(Nome_Jogo) like (?)',["%".strtoupper($request->search)."%"]);
+            }
+        })
+        ->paginate(30);
+
+        $genres = Genre::all();
+        $platforms = Platform::all();
+        $developers = Developer::all();
         //$games = $this->repository->search($request->search);
 
         //dd($games);
@@ -222,8 +267,20 @@ class GameController extends Controller
         return view('public.explore',[
              'games' => $games,
              'pesquisa' => $pesquisa,
+             'genero' => $genero,
+             'plataforma' => $plataforma,
+             'desenvolvedora' => $desenvolvedora,
+
+             'genres' => $genres,
+             'platforms' => $platforms,
+             'developers' => $developers,
+
+             'class' => $class,
+
+             'filters' => $filters,
          ]);
-    }
+        }
+    
 
     public function listStore(Request $request){
         $data = $request->all();
@@ -239,15 +296,4 @@ class GameController extends Controller
         return redirect()->back();
     }
     
-    public function dinamic(Request $request){
-
-        $games = Game::where(function ($query) use($request){
-            if($request){
-                $query->where('Nome_Jogo','like',"%{$request->search}%");
-            }
-        })
-        ->first();
-
-        echo json_encode($games);
-    }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Answer;
+use App\User;
 use Illuminate\Http\Request;
 
 class ResponseController extends Controller
@@ -41,8 +42,19 @@ class ResponseController extends Controller
         // dd($data);
  
          Answer::create($data);
+
+         
+        $user = User::where('id','=',$request->Id_Usuario)->first();
+
+        $infoUser = array(
+            "name" => $user->name,
+            "img_perfil" => $user->img_perfil
+        );
+
+       echo json_encode($infoUser);
+
  
-         return redirect()->back();
+        //  return redirect()->back();
     }
 
     /**
@@ -76,7 +88,13 @@ class ResponseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (!$comentario = Answer::find($id)){
+            return redirect()->back();
+        }
+
+        
+        $comentario->update($request->all());
+        return redirect()->back();
     }
 
     /**
@@ -87,6 +105,13 @@ class ResponseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $resposta = Answer::where('id', $id)->first();
+
+        if(!$resposta){
+            return redirect()->back();
+        }
+        
+        $resposta->delete();
+        return redirect()->back();
     }
 }

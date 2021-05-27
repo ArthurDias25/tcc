@@ -23,6 +23,7 @@ class CreateListingsTable extends Migration
             $table->date('Finalização')->nullable();
             $table->date('Completado')->nullable();
             $table->time('Tempo')->nullable();
+            $table->integer('Replayed')->nullable();
             $table->foreignId('Id_Status')->constrained('statuses');
             $table->boolean('Favorite')->default(false);
             $table->timestamps();

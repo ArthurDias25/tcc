@@ -42,7 +42,7 @@
                               <b style="color: white">Jogos</b>
                             </a>
                             <div class="dropdown-menu">
-                                {{-- <a class="dropdown-item" href="#"><b>Explorar</b></a> --}}
+                                <a class="dropdown-item" href="{{route('games')}}"><b>Explorar</b></a>
                                 <a class="dropdown-item" href="{{route('rank')}}"><b>Top Jogos</b></a>
                                 {{-- <a class="dropdown-item" href="#"><b>Lançamentos</b></a>
                                 <a class="dropdown-item" href="#"><b>Análises</b></a> --}}
@@ -54,11 +54,25 @@
                     {{-- <input id="search" type="text" placeholder="Search" style="width: 65ch;"> --}}
                     <form class="form-inline" action="{{route('search')}}">
                         @csrf
-                        <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search" style="width: 65ch;"
+                        <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search" style="width: 55ch;"
                         @if (isset($pesquisa))
                             value="{{$pesquisa}}"
                         @endif
                         >
+                        <select name="filter" id="filter" class="custom-select mt">
+                            @if ((isset($class)) && ($class == "Jogos"))
+                                <option selected value="Jogos">Jogos</option> 
+                            @else
+                                <option value="Jogos">Jogos</option>
+                            @endif
+                            @if ((isset($class)) && ($class == "Users"))
+                                <option selected value="Users">Usuarios</option>     
+                            @else
+                                <option value="Users">Usuarios</option>
+                            @endif
+
+
+                        </select>
                         <button class="btn btn-dark" type="submit"><i class="fa fa-search" style="font-size:20px"></i></button>
                     </form>
 

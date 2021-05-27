@@ -47,9 +47,24 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        
+        if($request->hasFile('Img_Artigo')){
+            if($request->Img_Artigo->isValid()){
+                $path = "artigo";
+                $file = $request->Img_Artigo;
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() .".". $extension;
+                $file->storeAs('artigo',$filename);
+                $Img_Artigo = $path ."/". $filename;
+                //dd($Img_Artigo);
+                $request->Img_Artigo = $Img_Artigo;
+                //dd($request->Img_Artigo);
+            }
+        };
+
         $data = $request->all();
 
-       // dd($data);
+        //dd($data);
 
         Post::create($data);
 
@@ -80,10 +95,19 @@ class PostController extends Controller
         $games = Game::with('categories','genres','developers','platforms','listings')
         ->get();
 
-        return view('edits.postEdit',[
-            'post' => $post,
-            'games' => $games,
-        ]);
+        if($post->Id_CategoriaPost == 1){
+            return view('edits.postEdit',[
+                'post' => $post,
+                'games' => $games,
+            ]);
+        }
+        if($post->Id_CategoriaPost == 3){
+            return view('edits.checkinEdit',[
+                'post' => $post,
+                'games' => $games,
+            ]);
+        }
+
     }
 
     /**

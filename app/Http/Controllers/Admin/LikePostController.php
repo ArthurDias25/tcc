@@ -49,10 +49,8 @@ class LikePostController extends Controller
     {
         $data = $request->all();
 
-       // dd($data);
-
-       //$this->repository()->create($data);
-
+        //echo "Teste";
+        
         PostLike::create($data);
 
         return redirect()->back();

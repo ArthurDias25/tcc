@@ -2,6 +2,9 @@
 
 @section('content')
 
+<br>
+<br>
+
     <div class="card col-12" style="background-color: black;">
         <div class="card-body">
           <p class="card-title text-white">

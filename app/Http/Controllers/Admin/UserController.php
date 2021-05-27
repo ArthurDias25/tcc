@@ -94,9 +94,6 @@ class UserController extends Controller
         foreach ($seguindo as $seg){
             $s[] += $seg->Following;
         }
-        //$s += Auth::user()->id;
-
-        //dd($s);
 
         $posts = Post::with('users','postlikes','comentarios','games')
         ->whereIn('Id_Usuario', $s)
@@ -178,6 +175,88 @@ class UserController extends Controller
 
         $follow->delete();
         return redirect()->back();
+    }
+
+    public function users(Request $request){
+
+        if($request->filter){
+            $class = $request->filter;
+        }else{
+            $class = "Users";
+        }
+        $filters = $request->all();
+        $pesquisa = $request->search;
+
+        $users = User::where(function ($query) use($request){
+            if($request->search){
+                $query->whereRaw('upper(name) like (?)',["%".strtoupper($request->search)."%"]);
+            }
+        })->paginate(30);
+
+        return view('public.exploreUser',[
+            'users' => $users,
+            'pesquisa' => $pesquisa,
+            
+            'class' => $class,
+
+            'filters' => $filters,
+        ]);
+    }
+
+    public function seguindo($id){
+
+        $user = User::where('id','=',$id)->first();
+
+        $seguindo = Follow::with('following')
+        ->where('Follower','=',$id)
+        ->get();
+
+        //dd($seguindo);
+
+        $follow = null;
+        if(Auth::user()){
+            $follow = Follow::where('Follower','=',Auth::user()->id)
+            ->where('Following','=',$id)
+            ->first();
+        }
+
+        $url = "Seguindo";
+
+        return view('public.seguindo',[
+            'user' => $user,
+            'seguindo' => $seguindo,
+            'url' => $url,
+            'id' => $id,
+            'follow' => $follow,
+        ]);
+    }
+
+    public function seguidores($id){
+
+        $user = User::where('id','=',$id)->first();
+
+        $seguidores = Follow::with('follower')
+        ->where('Following','=',$id)
+        ->get();
+
+        //dd($seguindo);
+
+        $follow = null;
+        if(Auth::user()){
+            $follow = Follow::where('Follower','=',Auth::user()->id)
+            ->where('Following','=',$id)
+            ->first();
+        }
+
+        $url = "Seguidores";
+
+        return view('public.seguidores',[
+            'user' => $user,
+            'seguidores' => $seguidores,
+            'url' => $url,
+            'id' => $id,
+            'follow' => $follow,
+        ]);
     }
 
 }

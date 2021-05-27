@@ -14,7 +14,7 @@
                     <input type="hidden" value="">
                     <div class="p-2 text-white" style="background-color: black;">
                     <b>
-                        <button class="btn text-white" type="submit">Todos os Jogos</button>
+                        <button class="btn text-white" style="width: 100%" type="submit">Todos os Jogos</button>
                     </b>
                     </div>
                 </form>
@@ -23,7 +23,7 @@
                     <input type="hidden" name="status" value="{{$status->id}}">
                     <div class="p-2 text-white" style="background-color: black;">
                     <b>
-                        <button class="btn text-white" type="submit">{{$status->Status}}</button>
+                        <button class="btn text-white" style="width: 100%" type="submit">{{$status->Status}}</button>
                     </b>
                     </div>
                 </form>
@@ -38,11 +38,21 @@
             </div>
             <br>
             <br>
-            <div style="background-color: black;">
+            {{-- <div style="background-color: black;">
               <br>
               <center><h5 class="text-success">Filtros</h5></center>
               <div class="container">
               <form action="{{route("list",$id)}}">
+                @if ($stat)
+                    <input type="hidden" name="status" value="{{$stat}}">
+                @endif
+                <div class="form-group text-dark">
+                    <select name="order" id="">
+                        <option value="Nome_Jogo">Nome</option>
+                        <option value="Nota">Nota</option>
+                        <option value="updated_at">Atualizados</option>
+                    </select>
+                </div>
                 <label for="plat" style="color: white">Plataforma</label>
                 <select name="plat" class="custom-select mb-3" placeholder="Plataforma">
                     <option value="">Todas</option>
@@ -50,14 +60,14 @@
                         <option value="{{$platform->id}}">{{$platform->Plataforma}}</option>
                     @endforeach    
                 </select>
-                {{-- <br>
+                <br>
                 <label for="ano" style="color: white">Ano</label>
                 <select name="ano" class="custom-select mb-3">
                   <option selected>Ano</option>
                   <option value="volvo">2017</option>
                   <option value="fiat">2015</option>
                   <option value="audi">2012</option>
-                </select> --}}
+                </select>
                 <br>
                 <label for="genero" style="color: white">Genero</label>
                 <select name="genero" class="custom-select mb-3">
@@ -69,7 +79,7 @@
                 <button type="submit">Filtrar</button>
               </form>
               </div>
-            </div>
+            </div> --}}
         </div>
         <div class="col-8">
             
@@ -101,10 +111,10 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{route('game',$game->id)}}"><img src="{{ url("storage/{$game->games->Imagem_Jogo}") }}" style="max-width: 100px;" ></a>    
+                                <a href="{{route('game',$game->games->id)}}"><img src="{{ url("storage/{$game->games->Imagem_Jogo}") }}" style="max-width: 100px;" ></a>    
                             </td>
                             <td>
-                                <a href="{{route('game',$game->id)}}"><b><p>{{$game->games->Nome_Jogo}}</p></b></a>
+                                <a href="{{route('game',$game->games->id)}}"><b><p>{{$game->games->Nome_Jogo}}</p></b></a>
                                 <p>{{$game->Comentarios}}</p>
                             </td>
                             <td>
@@ -141,10 +151,10 @@
                                 @endif
                             </td>
                             <td>
-                                <a href=""><img src="{{ url("storage/{$game->games->Imagem_Jogo}") }}" style="max-width: 100px;" ></a>    
+                                <a href="{{route('game',$game->games->id)}}"><img src="{{ url("storage/{$game->games->Imagem_Jogo}") }}" style="max-width: 100px;" ></a>    
                             </td>
                             <td>
-                                <a href=""><b><p>{{$game->games->Nome_Jogo}}</p></b></a>
+                                <a href="{{route('game',$game->games->id)}}"><b><p>{{$game->games->Nome_Jogo}}</p></b></a>
                                 <p>{{$game->Comentarios}}</p>
                             </td>
                             <td>

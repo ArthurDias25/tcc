@@ -65,7 +65,7 @@
             <tr>
                 <td><p>{{$positions++}}</p></td>
                 <td>
-                    <a href="{{route('game',$game->id)}}"><img src="{{ url("storage/{$game->Imagem_Jogo}") }}" style="max-width: 100px;" ></a>
+                    <a href="{{route('game',$game->id)}}"><img src="{{ url("storage/{$game->Imagem_Jogo}") }}" style="width: 100px;" ></a>
                 </td>
                 <td>
                     <a href="{{route('game',$game->id)}}"><b><p>{{$game->Nome_Jogo}}</p></b></a>
@@ -87,7 +87,7 @@
                     @endforeach
                 </td>
                 <td>
-                    <i class="fas fa-star" style="color: yellow"></i>{{$game->listings->avg('Nota')}}
+                    <i class="fas fa-star" style="color: yellow"></i>{{number_format($game->listings->avg('Nota'),2)}}
                 </td>
                 <td>
                     @if (isset ($listings))
@@ -124,7 +124,7 @@
                         @endphp
                         @foreach ($listings as $listing)
                             @if ($listing->Id_Game == $game->id)
-                                <p><button type="button" style="width: 150px" class="btn btn-{{$listing->status->Status}}" data-toggle="modal" data-target="#edit-{{$listing->id}}">{{$listing->status->Status}}</button></p>
+                                <p><button type="button" style="width: 150px" class="btn btn-{{$listing->status->Status}}" data-toggle="modal" data-target="#edit-{{$listing->id}}-{{$game->id}}">{{$listing->status->Status}}</button></p>
                                 @php
                                     $count = 1;
                                 @endphp
@@ -144,6 +144,7 @@
             @endforeach    
         </tbody>
     </table>
+    {!! $games->links() !!}
 </div>
     
 @endsection

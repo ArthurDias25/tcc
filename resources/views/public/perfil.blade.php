@@ -40,7 +40,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Jogando Recentemente</h5>
                         @foreach ($listings as $listing)
-                            <a href=""><img src="{{ url("storage/{$listing->games->Imagem_Jogo}") }}" class="responsive-image" alt="" width="60" ></a>
+                            <a href="{{route('game',$listing->games->id)}}"><img src="{{ url("storage/{$listing->games->Imagem_Jogo}") }}" class="responsive-image" alt="" width="60" ></a>
                         @endforeach
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Jogos Favoritos</h5>
                         @foreach ($favorites as $favorite)
-                            <a href=""><img src="{{ url("storage/{$favorite->games->Imagem_Jogo}") }}" class="responsive-image" alt="" width="60"></a>
+                            <a href="{{route('game',$favorite->games->id)}}"><img src="{{ url("storage/{$favorite->games->Imagem_Jogo}") }}" class="responsive-image" alt="" width="60"></a>
                         @endforeach
                     </div>
                 </div>

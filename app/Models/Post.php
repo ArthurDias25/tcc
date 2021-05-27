@@ -9,7 +9,7 @@ class Post extends Model
 {
 
     protected $fillable = [
-        'Titulo', 'Post', 'Id_Game', 'Id_Usuario'
+        'Titulo', 'Post', 'Id_Game', 'Id_Usuario', 'Id_CategoriaPost', 'Img_Artigo'
     ];
 
     public function users()

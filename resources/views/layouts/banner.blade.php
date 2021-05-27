@@ -26,6 +26,20 @@
                         <a class="nav-link" href="{{Route('list',$id)}}"><b class="text-white">Game List</b></a>
                     @endif
                 </li>
+                <li class="nav-item">
+                    @if ($url == "Seguindo")
+                        <a class="nav-link active" href="{{Route('seguindo',$id)}}"><b>Seguindo</b></a>                    
+                    @else
+                        <a class="nav-link" href="{{Route('seguindo',$id)}}"><b class="text-white">Seguindo</b></a>
+                    @endif
+                </li>
+                <li class="nav-item">
+                    @if ($url == "Seguidores")
+                        <a class="nav-link active" href="{{Route('seguidores',$id)}}"><b>Seguidores</b></a>                    
+                    @else
+                        <a class="nav-link" href="{{Route('seguidores',$id)}}"><b class="text-white">Seguidores</b></a>
+                    @endif
+                </li>
                 <!--
                 <li class="nav-item">
                     <a class="nav-link" id="collection-tab" data-toggle="tab" href="#collection" role="tab" aria-controls="collection" aria-selected="false">collection list</a>

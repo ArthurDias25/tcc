@@ -49,11 +49,12 @@ class ComentController extends Controller
     {
         $data = $request->all();
 
-        Coment::create($data);
+        $comentario = Coment::create($data);
 
         $user = User::where('id','=',$request->Id_Usuario)->first();
 
          $infoUser = array(
+             "id" => $comentario->id,
              "name" => $user->name,
              "img_perfil" => $user->img_perfil
          );

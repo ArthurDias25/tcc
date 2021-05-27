@@ -17,7 +17,7 @@
                 @endphp
                 @foreach ($listings as $listing)
                     @if ($listing->Id_Game == $game->id)
-                        <p><button type="button" style="width: 255px" class="btn btn-{{$listing->status->Status}}" data-toggle="modal" data-target="#edit-{{$listing->id}}">{{$listing->status->Status}}</button></p>
+                        <p><button type="button" style="width: 255px" class="btn btn-{{$listing->status->Status}}" data-toggle="modal" data-target="#edit-{{$listing->id}}-{{$game->id}}">{{$listing->status->Status}}</button></p>
                         @php
                             $count = 1;
                         @endphp
@@ -66,8 +66,9 @@
           </div>
           <br>
         </div>
-        <div class="col-sm-8" style="background-color: black;">
-            <div>              
+        <div class="col-sm-8" >
+            <div style="background-color: black;">
+              <div>              
                 <br>  
                 <div class="d-flex ">
                 <h2 class="text-success">{{$game->Nome_Jogo}}</h2>
@@ -76,9 +77,9 @@
             <br>
             <div class="d-flex justify-content-between text-white ">
                 <div class="p-2 border p-3">
-                    <h6 class="text-success">Nota Geral</h6> 
-                    <center><h2>{{$game->listings->avg('Nota')}}</h2></center>
-                    <h7>{{$game->listings->count()}} Usuários</h7>
+                  <center><h6 class="text-success">Nota Geral</h6> 
+                    <h2>{{number_format($game->listings->avg('Nota'),2)}}</h2>
+                    <h7>{{$game->listings->count()}} Usuários</h7></center>
                 </div>
                 {{-- <div class="p-2 border p-3">
                     <h6 class="text-success">Posição no Rank</h6> 
@@ -89,7 +90,14 @@
                     <center><h2>X</h2></center>
                 </div> --}}
             </div>
+            </div>
             <br>
+            <div>
+              @if (Auth::user())
+                @include('layouts.formPost')            
+              @endif
+              @include('layouts.post')
+            </div>
             {{-- <div class="d-flex justify-content-start text-white">
                 <div class="p-2 dropdown">
                     <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" style="background-color: lightseagreen;">
@@ -135,13 +143,6 @@
             <br>
             <br> --}}
         </div>
-    </div>
-    
-    <div class="col-sm-9" style="margin-top:80px">
-        @if (Auth::user())
-            @include('layouts.formPost')            
-        @endif
-        @include('layouts.post')
     </div>
 
     
